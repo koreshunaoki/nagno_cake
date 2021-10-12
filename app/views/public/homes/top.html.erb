@@ -1,0 +1,12 @@
+
+<%= image_tag 'birthday-gc2d6f4e29_640', size: "600x350" %>
+<h3>新着商品</h3>
+  <div>
+    <% @items.each do |item| %>
+      <%= attachment_image_tag item, :image, :fill, 100, 100, format:'jpg', fallback:"no_image.jpg" %><br>
+      <%= item.name %><br>
+      ￥<%= item.price %><br>
+    <% end %>
+    <%= link_to 'すべての商品を見る', public_items_path, class:"nav-link" %>
+  </div>
+

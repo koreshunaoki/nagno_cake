@@ -1,0 +1,30 @@
+<h1>商品詳細</h1>
+
+
+  <%= attachment_image_tag @items, :image, size: "100x100", format: "jpeg", fallback: "no_image.jpg" %>
+
+    <th>商品名</th>
+    <th><%= @items.name %></th>
+  </tr><br />
+  <tr>
+    <th>商品説明</th>
+    <th><%= @items.introduction %></th>
+  </tr><br />
+
+  <tr>
+    <th>￥<%= @items.taxin_price %>(税込)</th>
+  </tr><br />
+  <tr>
+    <th></th>
+  </tr><br />
+  <%= form_with model: @cart_item, url: public_cart_items_path, local:true do |f| %>
+
+    <%= f.hidden_field :item_id, value: @items.id %>
+
+    <%= f.select :amount, *[1..3] %>
+
+    <%= f.submit "カートに入れる", class: "btn btn-success btn-lg center-block" %>
+  <% end %>
+
+
+

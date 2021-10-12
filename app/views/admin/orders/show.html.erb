@@ -1,0 +1,21 @@
+<tr>
+  <th>購入者</th>
+  <th><%= @customer.name %></th>
+</tr><br />
+<tr>
+  <th>注文日</th>
+  <th><%= @customer.created_at %></th>
+</tr><br />
+<tr>
+  <th>配送先</th>
+  <th><%= @customer.postal_code %><%= @customer.address %></th>
+</tr><br />
+<tr>
+  <th>支払方法</th>
+  <th><%= @customer.payment_method %></th>
+</tr><br />
+<tr>
+  <th>注文ステータス</th>
+  <th><%= @customer.status %></th>
+</tr>
+
