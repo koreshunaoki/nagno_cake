@@ -18,10 +18,9 @@ Rails.application.routes.draw do
     resources :addresses
   end
   namespace :public do
-    get 'orders/new'
     get 'orders/thanks'
-    get 'orders/index'
-    get 'orders/show'
+    post "orders/confirm"
+    resources :orders
   end
   namespace :public do
     delete 'cart_items/destroy_all'

@@ -1,2 +1,38 @@
-<h1>Public::Orders#index</h1>
-<p>Find me in app/views/public/orders/index.html.erb</p>
+<h2>注文情報入力</h2>
+ <h4>支払方法</h4>
+  <%= f.radio_button :payment_method, "credit_card" %>
+  <%= f.label :payment_method, "クレジットカード" %>
+  
+  <%= f.radio_button :payment_method, "transfer" %>
+  <%= f.label :payment_method, "銀行振込" %>
+  
+  <h4>お届け先</h4>
+  
+  
+  <%= form_with model: @order, url: public_order_path(order), local:true do |f| %>
+  
+    
+    <%= f.radio_button :address, "customer_address" %>
+    <%= f.label :address, "ご自身の住所" %>
+    
+    <%= f.radio_button :address, "registered_address" %>
+    <%= f.label :payment_method, "登録済みの住所から選択" %>
+    <%= f.select :address, (order.address,1) %>
+    
+    <%= f.radio_button :payment_method, "new_address" %>
+    <%= f.label :payment_method, "新しいお届け先" %>
+    <div>
+      <%= f.label :postal_code, "郵便番号" %>　　　　　　　　　　<%= f.text_field :postal_code, autofocus: true, autocomplete: "postal_code" %>
+    </div><br>
+    <div>
+      <%= f.label :address, "住所" %>　　　　　　　　　　　　<%= f.text_field :address, autofocus: true, autocomplete: "address", include_blank: '都道府県' %>
+    </div><br>
+    <div>
+      <%= f.label :name, "宛名　　　　　　　　　　　　 " %><%= f.text_field :name, autofocus: true, autocomplete: "name" %>
+    </div><br>
+
+    <%= f.submit "変更内容を保存", class: "btn btn-success btn-lg center-block" %>
+
+    
+  <% end %>
+   
