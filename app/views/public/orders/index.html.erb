@@ -1,38 +1,22 @@
-<h2>注文情報入力</h2>
- <h4>支払方法</h4>
-  <%= f.radio_button :payment_method, "credit_card" %>
-  <%= f.label :payment_method, "クレジットカード" %>
-  
-  <%= f.radio_button :payment_method, "transfer" %>
-  <%= f.label :payment_method, "銀行振込" %>
-  
-  <h4>お届け先</h4>
-  
-  
-  <%= form_with model: @order, url: public_order_path(order), local:true do |f| %>
-  
-    
-    <%= f.radio_button :address, "customer_address" %>
-    <%= f.label :address, "ご自身の住所" %>
-    
-    <%= f.radio_button :address, "registered_address" %>
-    <%= f.label :payment_method, "登録済みの住所から選択" %>
-    <%= f.select :address, (order.address,1) %>
-    
-    <%= f.radio_button :payment_method, "new_address" %>
-    <%= f.label :payment_method, "新しいお届け先" %>
-    <div>
-      <%= f.label :postal_code, "郵便番号" %>　　　　　　　　　　<%= f.text_field :postal_code, autofocus: true, autocomplete: "postal_code" %>
-    </div><br>
-    <div>
-      <%= f.label :address, "住所" %>　　　　　　　　　　　　<%= f.text_field :address, autofocus: true, autocomplete: "address", include_blank: '都道府県' %>
-    </div><br>
-    <div>
-      <%= f.label :name, "宛名　　　　　　　　　　　　 " %><%= f.text_field :name, autofocus: true, autocomplete: "name" %>
-    </div><br>
+ <h2>注文履歴一覧</h2>
+ 
+ 
+ <table border="3" bordercolor="black">
+    <tr>
+      <th>注文日</th>
+      <th>配送先</th>
+      <th>注文商品</th>
+      <th>支払金額</th>
+      <th>ステータス</th>
+      <th>注文詳細</th>
+    </tr>
+    <tr><% @orders.each do |order| %></tr>
+      <th><%= order.customer.created_at %></th>
+      <th><%= order.customer.address %></th>
+      <th><%#= order.customer.item %></th>
+      <th><%#= order.customer.total_payment %></th>
+      <th><%#= order.customer.status %></th>
+      <th><%= link_to "表示する", public_order_path(order), class:"btn btn-success  center-block" %></th>
+    <tr><% end %></tr>
+  </table>
 
-    <%= f.submit "変更内容を保存", class: "btn btn-success btn-lg center-block" %>
-
-    
-  <% end %>
-   

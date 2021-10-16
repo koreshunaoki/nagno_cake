@@ -2,7 +2,7 @@
 
 
   <%= attachment_image_tag @items, :image, size: "100x100", format: "jpeg", fallback: "no_image.jpg" %>
-
+ <tr>
     <th>商品名</th>
     <th><%= @items.name %></th>
   </tr><br />
@@ -12,20 +12,19 @@
   </tr><br />
 
   <tr>
-    <th>￥<%= @items.taxin_price %>(税込)</th>
+    <th>￥<%= @items.taxin_price.floor %>(税込)</th>
   </tr><br />
   <tr>
     <th></th>
   </tr><br />
-  <% if @item.is_active == TRUE %>
-    <%= form_with model: @cart_item, url: public_cart_items_path, local:true do |f| %>
 
-      <%= f.hidden_field :item_id, value: @items.id %>
+  <%= form_with model: @cart_item, url: public_cart_items_path, local:true do |f| %>
 
-      <%= f.select :amount, *[1..3] %>
+    <%= f.hidden_field :item_id, value: @items.id %>
 
-      <%= f.submit "カートに入れる", class: "btn btn-success btn-lg center-block" %>
-    <% end %>
+    <%= f.select :amount, *[1..3] %>
+
+    <%= f.submit "カートに入れる", class: "btn btn-success btn-lg center-block" %>
   <% end %>
 
 
