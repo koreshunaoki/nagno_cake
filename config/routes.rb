@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   devise_for :customers, skip: :all
   devise_for :admins, skip: :all
   namespace :admin do
-    get 'orders/show'
+    resources :orders, only: [:show, :update]
   end
   namespace :admin do
     resources :customers
@@ -25,6 +25,9 @@ Rails.application.routes.draw do
   end
   namespace :admin do
     resources :items
+  end
+  namespace :admin do
+    resources :order_details, only: [:update]
   end
   namespace :admin do
     get 'homes/top'

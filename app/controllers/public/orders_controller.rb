@@ -12,6 +12,14 @@ class Public::OrdersController < ApplicationController
     @order = Order.new(order_params)
     @order.customer_id = current_customer.id
     @order.save
+    current_customer.cart_items.each do |cart_item|
+    @order_detail = @order.order_details.new(
+        item_id: cart_item.item_id,
+        price: cart_item.item.price,
+        amount: cart_item.amount)
+    @order_detail.save
+    end
+    current_customer.cart_items.destroy_all
     redirect_to public_orders_thanks_path
   end
 
@@ -25,7 +33,7 @@ class Public::OrdersController < ApplicationController
     if params[:order][:address_option] == "current_customer_address"
       @order.postal_code = current_customer.postal_code
       @order.address = current_customer.address
-      #@order.name = current_customer.name
+      @order.name = current_customer.last_name + current_customer.first_name
     elsif params[:order][:address_option] == "registered_address"
       @order.postal_code = Address.find(params[:order][:address_id]).postal_code
       @order.address = Address.find(params[:order][:address_id]).address
@@ -39,6 +47,8 @@ class Public::OrdersController < ApplicationController
 
 
   def show
+    @order = Order.find(params[:id])
+    #@order_detail = OrderDetail.find(params[:id])
   end
 
 

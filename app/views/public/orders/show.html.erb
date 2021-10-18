@@ -4,26 +4,26 @@
  <table border="3" bordercolor="black">
     <tr>
       <th>注文日</th>
-      <th><%= order.customer.created_at %></th>
+      <th><%= @order.created_at %></th>
     </tr>
     <tr>
       <th>配送先</th>
-      <th><%= order.customer.address %></th>
+      <th><%= @order.customer.postal_code %><br><%= @order.customer.address %><br><%= @order.name %></th>
     </tr>
     <tr>
       <th>支払方法</th>
-      <th><%= order.customer.payment_method %></th>
+      <th><%= @order.payment_method %></th>
     </tr>
     <tr>
       <th>ステータス</th>
-      <th><%#= order.customer.status %></th>
+      <th><%= @order.status %></th>
     </tr>
   </table>
 
   <table border="3" bordercolor="black">
     <tr>
       <th>商品合計</th>
-      <th><% @sum += cart_item.item.taxin_price.floor * cart_item.amount %></th>
+      <th><%= @order.total_payment %></th>
     </tr>
     <tr>
       <th>送料</th>
@@ -31,25 +31,15 @@
     </tr>
     <tr>
       <th>ご請求額</th>
-      <th><%= @sum + shipping_cost %></th>
+      <th><%= @order.total_payment + shipping_cost %></th>
     </tr>
   </table>
 
-<table border="3" bordercolor="black">
-    <tr>
-      <th>商品</th>
-      <th><%= @cart_item.item.name %></th>
-    </tr>
-    <tr>
-      <th>単価(税込)</th>
-      <th><%= @cart_item.item.taxin_price.floor %></th>
-    </tr>
-    <tr>
-      <th>個数</th>
-      <th><%= @cart_item.amount %></th>
-    </tr>
-    <tr>
-      <th>小計</th>
-      <th><%= @cart_item.item.taxin_price.floor * cart_item.amount %></th>
-    </tr>
-  </table>
+ <% @order.order_details.each do |order_detail| %>
+      <tr>
+        <th><%= order_detail.item.name %></th>
+        <th><%= order_detail.item.taxin_price.floor %></th>
+        <th><%= order_detail.amount %></th>
+        <th><%= order_detail.item.taxin_price.floor * order_detail.amount %></th>
+      </tr>
+    <% end %>

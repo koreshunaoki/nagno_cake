@@ -1,42 +1,40 @@
-<table class="table table-hover table-inverse">
+<table class="attributes">
   <thead>
     <tr>
       <th>会員ID</th>
-      <th><%= customer_id %></th>
+      <th><%= @customer.id %></th>
     </tr><br />
     <tr>
       <th>氏名</th>
-      <th><%= customer.last_name %></th>
-      <th><%= customer.first_name %></th>
+      <th><%= @customer.last_name %>　<%= @customer.first_name %></th>
     </tr><br />
     <tr>
       <th>フリガナ</th>
-      <th><%= customer.last_name_kana %></th>
-      <th><%= customer.first_name_kana %></th>
+      <th><%= @customer.last_name_kana %><%= @customer.first_name_kana %></th>
     </tr><br />
     <tr>
       <th>郵便番号</th>
-      <th><%= customer.postal_code %></th>
+      <th><%= @customer.postal_code %></th>
     </tr><br />
     <tr>
       <th>住所</th>
-      <th><%= customer.address %></th>
+      <th><%= @customer.address %></th>
     </tr><br />
     <tr>
       <th>電話番号</th>
-      <th><%= customer.telephone_number %></th>
+      <th><%= @customer.telephone_number %></th>
     </tr><br />
     <tr>
       <th>メールアドレス</th>
-      <th><%= customer.email %></th>
+      <th><%= @customer.email %></th>
     </tr><br />
     <tr>
       <th>会員ステータス</th>
-      <th>customer.is_deleted</th>
-    </tr>
-
-
+      <th><%= @customer.is_deleted %></th>
     </tr>
   </thead>
 
 </table>
+
+
+<%= link_to "編集する", edit_admin_customer_path(@customer), class:"btn btn-success  center-block" %><%= link_to "注文履歴一覧を見る", admin_homes_top_path, class:"btn btn-success  center-block" %>

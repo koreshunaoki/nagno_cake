@@ -1,6 +1,6 @@
  <h2>注文履歴一覧</h2>
- 
- 
+
+
  <table border="3" bordercolor="black">
     <tr>
       <th>注文日</th>
@@ -11,11 +11,15 @@
       <th>注文詳細</th>
     </tr>
     <tr><% @orders.each do |order| %></tr>
-      <th><%= order.customer.created_at %></th>
-      <th><%= order.customer.address %></th>
-      <th><%#= order.customer.item %></th>
-      <th><%#= order.customer.total_payment %></th>
-      <th><%#= order.customer.status %></th>
+      <th><%= order.created_at %></th>
+      <th><%= order.postal_code %><br><%= order.address %><br><%= order.name %></th>
+      <th>
+        <% order.order_details.each do |order_detail| %>
+        <%= order_detail.item.name %>
+        <% end %>
+      </th>
+      <th><%= order.total_payment %></th>
+      <th><%= order.status %></th>
       <th><%= link_to "表示する", public_order_path(order), class:"btn btn-success  center-block" %></th>
     <tr><% end %></tr>
   </table>

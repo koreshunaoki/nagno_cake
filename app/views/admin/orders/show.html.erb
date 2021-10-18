@@ -1,21 +1,48 @@
-<tr>
-  <th>購入者</th>
-  <th><%= @customer.name %></th>
-</tr><br />
-<tr>
-  <th>注文日</th>
-  <th><%= @customer.created_at %></th>
-</tr><br />
-<tr>
-  <th>配送先</th>
-  <th><%= @customer.postal_code %><%= @customer.address %></th>
-</tr><br />
-<tr>
-  <th>支払方法</th>
-  <th><%= @customer.payment_method %></th>
-</tr><br />
-<tr>
-  <th>注文ステータス</th>
-  <th><%= @customer.status %></th>
-</tr>
+<h2>注文履歴詳細</h2>
+<table class="table table-hover table-inverse">
+  <tr>
+    <th>購入者</th>
+    <th><%= link_to admin_customer_path do %><%= @order.name %><% end %></th>
+  </tr><br />
+  <tr>
+    <th>注文日</th>
+    <th><%= @order.created_at %></th>
+  </tr><br />
+  <tr>
+    <th>配送先</th>
+    <th><%= @order.postal_code %><%= @order.address %><br><%= @order.name %></th>
+  </tr><br />
+  <tr>
+    <th>支払方法</th>
+    <th><%= @order.payment_method %></th>
+  </tr><br />
+  <tr>
+    <th>注文ステータス</th>
+    <%= form_with model: @order, url: admin_order_path(@order), local:true do |f| %>
+    <th><%= f.select :status, [["入金待ち",0], ["入金確認",1], ["製作中",2], ["発送準備中",3], ["発送済み",4]] %><%= f.submit "更新" %></th>
+    <% end %>
+  </tr>
 
+</table>
+
+<table border="3", bordercolor="black">
+  <tr>
+    <th>商品名</th>
+    <th>単価(税込)</th>
+    <th>数量</th>
+    <th>小計</th>
+    <th>製作ステータス</th>
+  </tr>
+  <% @sum = 0 %>
+  <% @order.order_details.each do |order_detail| %>
+    <tr>
+      <th><%= order_detail.item.name %></th>
+      <th><%= order_detail.item.taxin_price.floor %></th>
+      <th><%= order_detail.amount %></th>
+      <th><%= order_detail.item.taxin_price.floor * order_detail.amount %></th>
+      <%= form_with model: order_detail, url: admin_order_detail_path(order_detail), local:true do |f| %>
+      <th><%= f.select :making_status, [["製作不可",0], ["製作待ち",1], ["製作中",2], ["製作終了",3]] %><%= f.submit "更新" %></th>
+      <% end %>
+    </tr>
+  <% end %>
+</table>

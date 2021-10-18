@@ -1,28 +1,39 @@
-<h1>会員情報編集</h1>
-<%= form_with model:@customer, url: admin_customer_path, local:true do |f| %>
-<div class_field>
-  <h3>商品ID</h3>
-  <%= customer_id %>
-  <h3>氏名</h3>
-  <%= f.text_field :last_name, class:"form-control name" %><%= f.text_field :first_name, class:"form-control name" %>
-  <h3>フリガナ</h3>
-  <%= f.text_field :last_name_kana, class:"form-control name" %><%= f.text_field :first_name_kana, class:"form-control name" %>
-  <h3>郵便番号</h3>
-  <%= f.text_field :postal_code, class:"form-control name" %>
-  <h3>住所</h3>
-  <%= f.text_field :address, class:"form-control name" %>
-  <h3>電話番号</h3>
-  <%= f.text_field :telephone_number, class:"form-control name" %>
-  <h3>メールアドレス</h3>
-  <%= f.text_field :email, class:"form-control name" %>
-  <h3>販売ステータス</h3>
-  <%= f.radio_button :is_deleted, "valid" %>
-　<%= f.label :is_deleted, "有効" %>
+<div class="container takasa">
+  <h2><%= @customer.last_name %><%= @customer.first_name %>さんの会員情報編集</h2>
+  <%= form_with model:@customer, url: admin_customer_path(@customer), local:true do |f| %>
+    <div>
+      <%= f.label :customer_id, "会員ID" %>　　　　　　　　　　<%= @customer.id %>
+    </div>
+    <div>
+        <%= f.label :last_name, "氏名　　　　　　　　　　姓）" %><%= f.text_field :last_name, autofocus: true, autocomplete: "last_name" %>
+        <%= f.label :first_name, "　　　　　　（名） " %><%= f.text_field :first_name, autofocus: true, autocomplete: "first_name" %>
+    </div><br>
+    <div>
+        <%= f.label :last_name_kana, "フリガナ　　　　　　　セイ）" %><%= f.text_field :last_name_kana, autofocus: true, autocomplete: "last_name_kana" %>
+        <%= f.label :first_name_kana, "　　　　　（メイ）" %><%= f.text_field :first_name_kana, autofocus: true, autocomplete: "first_name_kana" %>
+    </div><br>
+    <div>
+        <%= f.label :postal_code, "郵便番号" %>　　　　　　　　　　<%= f.text_field :postal_code, autofocus: true, autocomplete: "postal_code" %>
+    </div><br>
+    <div>
+        <%= f.label :address, "住所" %>　　　　　　　　　　　　<%= f.text_field :address, autofocus: true, autocomplete: "address", include_blank: '都道府県' %>
+    </div><br>
+    <div>
+        <%= f.label :telephone_number, "電話番号" %>　　　　　　　　　　<%= f.text_field :telephone_number, autofocus: true, autocomplete: "phone_number" %>
+    </div><br>
+    <div>
+        <%= f.label :email, "メールアドレス" %>　　　　　　　<%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    </div><br>
 
-  <%= f.radio_button :is_deleted, "secession" %>
-  <%= f.label :is_deleted, "退会" %>
+    <h3>販売ステータス</h3>
+    <%= f.radio_button :is_deleted, "valid" %>
+  　<%= f.label :is_deleted, "有効" %>
 
+    <%= f.radio_button :is_deleted, "secession" %>
+    <%= f.label :is_deleted, "退会" %>
+
+
+    <%= f.submit "編集内容を保存", class: "btn btn-success btn-lg center-block" %>
+
+  <% end %>
 </div>
-<%= f.submit '変更を保存する', class:"btn btn-success" %>
-
-<% end %>
