@@ -1,4 +1,4 @@
-<table class="attributes">
+<table class="container takasa">
   <thead>
     <tr>
       <th>会員ID</th>
@@ -30,11 +30,22 @@
     </tr><br />
     <tr>
       <th>会員ステータス</th>
-      <th><%= @customer.is_deleted %></th>
+      <th>
+        <% if @customer.is_deleted %>
+        <span>退会</span>
+        <% else %>
+        <span>有効</span>
+        <% end %>
+      </th>
+      <th>
+      <%= link_to "編集する", edit_admin_customer_path(@customer), class:"btn btn-success  center-block" %><%= link_to "注文履歴一覧を見る", admin_homes_top_path, class:"btn btn-success  center-block" %>
+      </th>
     </tr>
+
   </thead>
+
 
 </table>
 
 
-<%= link_to "編集する", edit_admin_customer_path(@customer), class:"btn btn-success  center-block" %><%= link_to "注文履歴一覧を見る", admin_homes_top_path, class:"btn btn-success  center-block" %>
+

@@ -31,9 +31,17 @@ class Public::SessionsController < Devise::SessionsController
   # end
 
   def validate_user
-    if Customer.find_by(email: params[:customer][:email]).is_deleted
-      redirect_to customers_sign_in_path
-      return
+   @customer = Customer.find_by(email: params[:customer][:email].downcase)
+    if @customer
+      if (@customer.valid_password?(params[:customer][:password]) && (@customer.active_for_authentication? == false))
+        flash[:error] = "退会済みです。"
+        redirect_to new_customer_session_path
+      end
+    else
+      flash[:error] = "必須項目を入力してください。"
     end
+  end
+  def after_sign_in_path_for(resource)
+    root_path
   end
 end

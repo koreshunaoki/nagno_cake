@@ -25,11 +25,11 @@
         <%= f.label :email, "メールアドレス" %>　　　　　　　<%= f.email_field :email, autofocus: true, autocomplete: "email" %>
     </div><br>
 
-    <h3>販売ステータス</h3>
-    <%= f.radio_button :is_deleted, "valid" %>
+    <h3>会員ステータス</h3>
+    <%= f.radio_button :is_deleted, "false" %>
   　<%= f.label :is_deleted, "有効" %>
 
-    <%= f.radio_button :is_deleted, "secession" %>
+    <%= f.radio_button :is_deleted, "true" %>
     <%= f.label :is_deleted, "退会" %>
 
 

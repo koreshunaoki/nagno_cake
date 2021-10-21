@@ -1,5 +1,5 @@
 <h1>商品編集</h1>
-<%= form_with model:@item, url: admin_items_path, local:true do |f| %>
+<%= form_with model:@item, url: admin_item_path(@item), local:true do |f| %>
 <div class_field>
   <h3>商品画像</h3>
   <%= f.attachment_field :image, class:"form-control-file user_image" %>
@@ -12,11 +12,11 @@
   <h3>税抜き価格</h3>
   <%= f.text_field :price, class:"form-control name" %>円
   <h3>販売ステータス</h3>
-  <%= f.radio_button :is_active, "on_sale" %>
-　<%= f.label :is_active, "販売中" %>
+  <%= f.radio_button :is_active, "false" %>
+　<%= f.label :is_active, "販売停止中" %>
 
-  <%= f.radio_button :is_active, "Sales suspended" %>
-  <%= f.label :is_active, "販売停止中" %>
+  <%= f.radio_button :is_active, "true" %>
+  <%= f.label :is_active, "販売中" %>
 
 </div>
 <%= f.submit '変更を保存する', class:"btn btn-success" %>

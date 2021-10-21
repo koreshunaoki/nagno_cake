@@ -12,7 +12,13 @@
       <th><%= customer.id %></th>
       <th><%= link_to admin_customer_path(customer) do %><%= customer.last_name %><%= customer.first_name %><% end %></th>
       <th><%= customer.email %></th>
-      <th><%#= item.is_active %></th>
+      <th>
+        <% if customer.is_deleted %>
+        <span>退会</span>
+        <% else %>
+        <span>有効</span>
+        <% end %>
+      </th>
     <tr><% end %></tr>
   </tbody>
 </table>

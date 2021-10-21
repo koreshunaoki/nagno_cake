@@ -7,4 +7,4 @@
 
 
 <%= link_to '退会しない', customers_my_page_path, class: "btn btn-success btn-lg center-block" %>
-<%= link_to '退会する', public_customers_withdraw_path, method: :patch, class: "btn btn-success btn-lg center-block" %>
+<%= link_to '退会する', public_customers_withdraw_path, method: :patch, data:{confirm: "本当に退会しますか？"}, class:"btn center-block btn-danger destroy_book_id" %>

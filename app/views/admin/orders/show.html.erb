@@ -16,12 +16,7 @@
     <th>支払方法</th>
     <th><%= @order.payment_method %></th>
   </tr><br />
-  <tr>
-    <th>注文ステータス</th>
-    <%= form_with model: @order, url: admin_order_path(@order), local:true do |f| %>
-    <th><%= f.select :status, [["入金待ち",0], ["入金確認",1], ["製作中",2], ["発送準備中",3], ["発送済み",4]] %><%= f.submit "更新" %></th>
-    <% end %>
-  </tr>
+  
 
 </table>
 
@@ -31,7 +26,6 @@
     <th>単価(税込)</th>
     <th>数量</th>
     <th>小計</th>
-    <th>製作ステータス</th>
   </tr>
   <% @sum = 0 %>
   <% @order.order_details.each do |order_detail| %>
@@ -40,9 +34,22 @@
       <th><%= order_detail.item.taxin_price.floor %></th>
       <th><%= order_detail.amount %></th>
       <th><%= order_detail.item.taxin_price.floor * order_detail.amount %></th>
-      <%= form_with model: order_detail, url: admin_order_detail_path(order_detail), local:true do |f| %>
-      <th><%= f.select :making_status, [["製作不可",0], ["製作待ち",1], ["製作中",2], ["製作終了",3]] %><%= f.submit "更新" %></th>
-      <% end %>
     </tr>
   <% end %>
 </table>
+
+<table border="3" bordercolor="white">
+  <tr>
+    <th>商品合計</th>
+    <th><%= @order.total_payment %></th>
+  </tr>
+  <tr>
+    <th>送料</th>
+    <th><%= shipping_cost = 800 %></th>
+  </tr>
+  <tr>
+    <th>請求金額合計</th>
+    <th><%= @order.total_payment + shipping_cost %></th>
+  </tr>
+</table>
+

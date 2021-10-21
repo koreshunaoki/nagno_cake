@@ -1,19 +1,14 @@
 Rails.application.routes.draw do
 
-  devise_scope :customer do
-    get 'customers/sign_in', to: 'public/sessions#new'
-    post 'customers/sign_in', to: 'public/sessions#create'
-    delete 'customers/sign_out', to: 'public/sessions#destroy'
-    post 'customers', to: 'public/registrations#create'
-    get 'customers/sign_up', to: 'public/registrations#new'
-  end
-    devise_scope :admin do
-    get 'admins/sign_in', to: 'admin/sessions#new'
-    post 'admins/sign_in', to: 'admin/sessions#create'
-    delete 'admins/sign_out', to: 'admin/sessions#destroy'
-  end
-  devise_for :customers, skip: :all
-  devise_for :admins, skip: :all
+
+  devise_for :customer, controllers: {
+    sessions: 'public/sessions',
+    registrations: 'public/registrations'
+  }
+  devise_for :admin, controllers: {
+    sessions: 'admin/sessions',
+    registrations: 'admin/registrations'
+  }
   namespace :admin do
     resources :orders, only: [:show, :update]
   end

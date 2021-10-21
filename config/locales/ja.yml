@@ -5,6 +5,5 @@ ja:
         credit_card: 'クレジットカード'
         transfer: '銀行振込'
       status:
-        outstanding: "未対応"
-        in_progress: "対応中"
-        closed: "対応済"
+        valid: "有効"
+        secession: "退会"
