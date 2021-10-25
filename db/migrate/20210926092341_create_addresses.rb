@@ -3,7 +3,7 @@ class CreateAddresses < ActiveRecord::Migration[5.2]
     create_table :addresses do |t|
       t.integer :customer_id
       t.string :name
-      t.string :postal_co
+      t.string :postal_cord
       t.string :address
 
       t.timestamps

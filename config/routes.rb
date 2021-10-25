@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
 
-
   devise_for :customer, controllers: {
     sessions: 'public/sessions',
     registrations: 'public/registrations'

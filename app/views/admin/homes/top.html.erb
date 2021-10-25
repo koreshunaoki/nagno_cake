@@ -11,6 +11,14 @@
     <% @orders.each do |order| %>
     <tr>
       <th><%= link_to admin_order_path(order) do %><%= order.created_at %><% end %></th>
+      <th><%= order.name %></th>
+      <% sum = 0 %>
+      <% order.order_details.each do |order_detail| %>
+        <% sum += order_detail.amount %>
+      <% end %>
+      <th>
+        <%= sum %>
+      </th>
     </tr>
     <% end %>
   </thead>
